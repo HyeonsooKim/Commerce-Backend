@@ -62,7 +62,8 @@ CORS_ALLOW_HEADERS = (
 
 LOCAL_APPS = [
     # Add local apps
-    'apps.user.apps.UserConfig'
+    'apps.user.apps.UserConfig',
+    'apps.order.apps.OrderConfig'
 ]
 
 DJANGO_APPS = [
@@ -126,6 +127,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTH_USER_MODEL = 'user.User'
 
 # JWT
 SIMPLE_JWT = {
