@@ -2,6 +2,16 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import MinValueValidator
 
+class Nationality(models.Model):
+    country_idx = models.IntegerField(primary_key=True)
+    country_code = models.CharField(max_length=10, null=False)
+    country_dcode = models.CharField(max_length=10, null=False)
+    country_name = models.CharField(max_length=50, null=False)
+
+    def __str__(self):
+        return '{} {} {}'.format(self.country_name, self.country_code, self.country_dcode)
+
+
 class UserManager(BaseUserManager):
     # 일반 user 생성
     def create_user(self, email, username, name, password=None):
@@ -32,6 +42,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+
 class User(AbstractBaseUser):
     GENDER_CHOICES = (('Male', '남성'), ('Female', '여성'))
 
@@ -42,6 +53,7 @@ class User(AbstractBaseUser):
     city = models.CharField(max_length=100, null=True)
     age = models.IntegerField(validators=[MinValueValidator(1)], null=True, blank=True)
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES, null=True, blank=True)
+    nationality = models.ForeignKey(Nationality, null=False, on_delete=models.CASCADE, related_name='user_nationality', default=191, db_column='nationality')
 
     # User 모델의 필수 field
     is_active = models.BooleanField(default=True)    
