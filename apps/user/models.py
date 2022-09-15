@@ -54,6 +54,7 @@ class User(AbstractBaseUser):
     age = models.IntegerField(validators=[MinValueValidator(1)], null=True, blank=True)
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES, null=True, blank=True)
     nationality = models.ForeignKey(Nationality, null=False, on_delete=models.CASCADE, related_name='user_nationality', default=191, db_column='nationality')
+    zipcode = models.CharField(max_length=20, null=True, blank=True)
 
     # User 모델의 필수 field
     is_active = models.BooleanField(default=True)    
