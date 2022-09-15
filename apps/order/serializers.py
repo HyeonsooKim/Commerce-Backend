@@ -1,5 +1,5 @@
 from .models import Order
-from apps.user.models import User
+from apps.user.models import User, Nationality
 from rest_framework import serializers
 from rest_framework.serializers import ValidationError
 
@@ -10,23 +10,23 @@ class OrderSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'date', 'quantity',
                             'price', 'saled_price', 'delivery_cost',
                             'payment_amount', 'coupon', 'buyr_country',
-                            'buyr_city', 'buyr_zipx', 'vccode']
+                            'buyr_city', 'buyr_zipx', 'vccode', 'delivery_num']
 
     def create(self, validated_data):
         username = validated_data['user']
-        print("user: ", username)
         user = User.objects.get(username=f"{username}")
-        print("order: ", user.id)
+        country = Nationality.objects.get(country_name=f"{str(user.nationality)}")
+
         order = Order.objects.create(
             pay_state=validated_data['pay_state'],
             delivery_state=validated_data['delivery_state'],
-            delivery_num=validated_data['delivery_num'],
             user=validated_data['user']
         )
         #추가 정보 저장
-        order.buyr_country = user.nationality
+        order.buyr_country = str(country.country_code)
         order.buyr_city = user.city
-        order.buyr_zipx = user.zipcode
+        order.buyr_zipx = str(user.zipcode)
+        order.vccode = str(country.country_dcode)
         order.save()
         return order
 
