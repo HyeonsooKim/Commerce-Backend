@@ -77,7 +77,7 @@ ERD
 
 
 <br>
-<img width="783" alt="스크린샷 2022-09-14 오후 11 58 04" src="https://user-images.githubusercontent.com/48047773/190190791-534c24d4-a531-4740-ba10-30ce42f526a4.png">
+
 
 
 ## API 목록
