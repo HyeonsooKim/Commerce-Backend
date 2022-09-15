@@ -71,15 +71,6 @@
 <br>
 
 
-## 팀 구성
-| 김현수 |
-| ------ |
-| [Github](https://github.com/HyeonsooKim)
-
-
-<br>
-
-
 ## ERD
 ERD 
 <img width="805" alt="스크린샷 2022-09-15 오후 11 26 11" src="https://user-images.githubusercontent.com/48047773/190429884-51722947-5eda-4822-a956-4adceaec4f55.png">
@@ -95,26 +86,4 @@ API 명세 주소
 
 <br>
 
-
-## 프로젝트 시작 방법
-1. 로컬에서 실행할 경우
-```bash
-# 프로젝트 clone(로컬로 내려받기)
-git clone -b develop --single-branch ${github 주소}
-cd ${디렉터리 명}
-
-# 가상환경 설정
-python -m venv ${가상환경명}
-source ${가상환경명}/bin/activate
-# window (2 ways) 
-# 1> ${가상환경명}/Scripts/activate
-# 2> activate
-
-# 라이브러리 설치
-pip install -r requirements.txt
-# 실행
-python manage.py runserver
-```
-
-<br>
 
