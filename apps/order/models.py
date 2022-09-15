@@ -1,6 +1,7 @@
 from configparser import MAX_INTERPOLATION_DEPTH
 from django.db import models
 from django.conf import settings
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Order(models.Model):
     PAY_STATE = (
@@ -22,7 +23,7 @@ class Order(models.Model):
     updated_at = models.DateTimeField(verbose_name='수정 날짜', auto_now=True)
     pay_state = models.PositiveIntegerField(verbose_name='결제 상태', choices=PAY_STATE)
     delivery_state = models.PositiveIntegerField(verbose_name='배송 상태', choices=DELIVERY_STATE)
-    quantity = models.IntegerField(default=1, verbose_name="주문수량")
+    quantity = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(72)], verbose_name="주문수량")
     price = models.DecimalField(default=0, decimal_places=2, max_digits=10, verbose_name='정가')
     saled_price = models.DecimalField(default=0,  decimal_places=2, max_digits=10, verbose_name='할인가')
     delivery_cost = models.DecimalField(verbose_name='배송비', max_digits=10, decimal_places=2, default=1200)
