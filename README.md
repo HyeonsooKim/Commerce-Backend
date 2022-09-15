@@ -72,7 +72,7 @@
 
 
 ## ERD
-ERD 
+
 <img width="805" alt="스크린샷 2022-09-15 오후 11 26 11" src="https://user-images.githubusercontent.com/48047773/190429884-51722947-5eda-4822-a956-4adceaec4f55.png">
 
 
