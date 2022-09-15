@@ -16,6 +16,7 @@ environ.Env.read_env(
 pymysql.install_as_MySQLdb()
 
 SECRET_KEY = env('SECRET_KEY')
+ALGORITHM = env('ALGORITHM')
 
 DATABASES = {
     'default' : {
@@ -62,7 +63,9 @@ CORS_ALLOW_HEADERS = (
 
 LOCAL_APPS = [
     # Add local apps
-    'apps.user.apps.UserConfig'
+    'apps.user.apps.UserConfig',
+    'apps.order.apps.OrderConfig',
+    'apps.product.apps.ProductConfig',
 ]
 
 DJANGO_APPS = [
@@ -77,6 +80,8 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'corsheaders',
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
 ]
 
 INSTALLED_APPS = LOCAL_APPS + DJANGO_APPS + THIRD_PARTY_APPS
@@ -127,6 +132,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'user.User'
+
 # JWT
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": datetime.timedelta(hours=1),
@@ -146,6 +153,17 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.AllowAny",
     ),
     "TEST_REQUEST_DEFAULT_FORMAT": "json",
+}
+
+# DRF-Spectacular
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Bulletin Board Service',
+    'DESCRIPTION': 'Provide Bulletin Board Service with password authentification and weather api',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
 }
 
 LANGUAGE_CODE = 'en-us'
