@@ -29,7 +29,7 @@ class Order(models.Model):
     delivery_cost = models.DecimalField(verbose_name='배송비', max_digits=10, decimal_places=2, default=1200)
     payment_amount = models.DecimalField(verbose_name='최종결제액', default=0, max_digits=10, decimal_places=2)
     buyr_city = models.CharField(max_length=100, verbose_name="도시", default='')
-    buyr_country = models.CharField(max_length=30, verbose_name='국가코드', default='')
+    buyr_country = models.CharField(max_length=100, verbose_name='국가코드', default='')
     buyr_zipx = models.CharField(max_length=30, verbose_name='우편번호', default='')
     vccode = models.IntegerField(verbose_name='국가번호', default=0)
     delivery_num = models.CharField(verbose_name="delivery_num", max_length=20, null=True)
