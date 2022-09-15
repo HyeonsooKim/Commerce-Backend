@@ -22,7 +22,7 @@ class OrderSerializer(serializers.ModelSerializer):
             delivery_state=validated_data['delivery_state'],
             user=validated_data['user']
         )
-        #추가 정보 저장
+        #추가 정보 저장 - 각 참조테이블에서 정보 불러오기
         order.buyr_country = str(country.country_code)
         order.buyr_city = user.city
         order.buyr_zipx = str(user.zipcode)

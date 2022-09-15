@@ -30,7 +30,7 @@ class Order(models.Model):
     delivery_state = models.PositiveIntegerField(verbose_name='배송 상태', choices=DELIVERY_STATE)
     quantity = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(72)], verbose_name="주문수량")
     price = models.DecimalField(default=0, decimal_places=2, max_digits=10, verbose_name='정가')
-    saled_price = models.DecimalField(default=0,  decimal_places=2, max_digits=10, verbose_name='할인가')
+    saled_price = models.DecimalField(default=0,  decimal_places=2, max_digits=10, verbose_name='할인금액')
     delivery_cost = models.DecimalField(verbose_name='배송비', max_digits=10, decimal_places=2, default=1200)
     payment_amount = models.DecimalField(verbose_name='최종결제액', default=0, max_digits=10, decimal_places=2)
     buyr_city = models.CharField(max_length=100, verbose_name="도시", default='')
@@ -44,4 +44,4 @@ class Order(models.Model):
         ordering = ('-order_date',)
 
     def __str__(self):
-        return '{} by {}'.format(self.products.name, self.user.username)
+        return '{} ordered at {}'.format(self.user.username, self.order_date)
