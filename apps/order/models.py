@@ -4,11 +4,17 @@ from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Delivery(models.Model):
+    """
+    나라별/갯수별 배송비 테이블
+    """
     country = models.CharField(max_length=100, verbose_name='국가이름', default='')
     quantity = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(72)], verbose_name="주문수량")
     cost = models.DecimalField(verbose_name='배송비', max_digits=10, decimal_places=2, default=1200)
 
 class Order(models.Model):
+    """
+    결제 정보 테이블
+    """
     PAY_STATE = (
         (0, '결제취소'),
         (1, '결제완료'),

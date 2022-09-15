@@ -3,6 +3,9 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import MinValueValidator
 
 class Nationality(models.Model):
+    """
+    국가 정보 모델
+    """
     country_idx = models.IntegerField(primary_key=True)
     country_code = models.CharField(max_length=10, null=False)
     country_dcode = models.CharField(max_length=10, null=False)
@@ -14,6 +17,9 @@ class Nationality(models.Model):
 
 
 class UserManager(BaseUserManager):
+    """
+    유저 생성 헬퍼클래스 (일반 유저, 관리자)
+    """
     # 일반 user 생성
     def create_user(self, email, username, name, password=None):
         if not email:
