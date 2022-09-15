@@ -31,6 +31,7 @@ class Order(models.Model):
     buyr_country = models.CharField(max_length=30, verbose_name='국가코드', default='')
     buyr_zipx = models.CharField(max_length=30, verbose_name='우편번호', default='')
     vccode = models.IntegerField(verbose_name='국가번호', default=0)
+    delivery_num = models.CharField(verbose_name="delivery_num", max_length=20, null=True)
 
     #모델 인스턴스를 주문 날짜 내림차순 정렬
     class Meta:
