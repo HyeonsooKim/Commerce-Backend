@@ -75,7 +75,7 @@
 
 ## API 목록
 API 명세 주소
-![127 0 0 1_8000_api_swagger (1)](https://user-images.githubusercontent.com/48047773/190426782-7eb1b15e-6d28-4629-97f7-f2ed4f44526a.png)
+![127 0 0 1_8000_api_swagger](https://user-images.githubusercontent.com/48047773/193191239-bb7c26ab-6742-413d-8fbb-6727679aa8c0.png)
 
 <br>
 
