@@ -157,8 +157,8 @@ REST_FRAMEWORK = {
 
 # DRF-Spectacular
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Bulletin Board Service',
-    'DESCRIPTION': 'Provide Bulletin Board Service with password authentification and weather api',
+    'TITLE': 'Commerce Service Backend',
+    'DESCRIPTION': 'Provide Commerce Service',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
