@@ -66,6 +66,7 @@ LOCAL_APPS = [
     'apps.user.apps.UserConfig',
     'apps.order.apps.OrderConfig',
     'apps.product.apps.ProductConfig',
+    'apps.coupon.apps.CouponConfig',
 ]
 
 DJANGO_APPS = [
