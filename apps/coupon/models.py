@@ -1,21 +1,21 @@
 from django.db import models
 
-class CouponCategoryChoices(models.TextChoices):
-    DELIVERY_COST = '배송비 할인', '배송비 할인'
-    PERCENT = '% 할인', '% 할인'
-    FIXED_AMOUNT = '정액 할인', '정액 할인'
+# class CouponCategoryChoices(models.TextChoices):
+#     DELIVERY_COST = '배송비 할인', '배송비 할인'
+#     PERCENT = '% 할인', '% 할인'
+#     FIXED_AMOUNT = '정액 할인', '정액 할인'
 
 class CouponType(models.Model):
     """
     쿠폰 타입을 선택합니다.
     """
 
-    # DC_TYPE = (
-    #     (0, '배송비 할인'),
-    #     (1, '퍼센트(%) 할인'),
-    #     (2, '정액 할인(KRW)'),
-    #     (3, '정액 할인(USD)'),
-    # )
+    DC_TYPE = (
+        (0, '배송비 할인'),
+        (1, '퍼센트(%) 할인'),
+        (2, '정액 할인(KRW)'),
+        (3, '정액 할인(USD)'),
+    )
 
     ISS_TYPE = (
         (0, '지정 발급'),
@@ -28,7 +28,7 @@ class CouponType(models.Model):
     period = models.PositiveIntegerField(verbose_name='유효기간(기한)', null=True)
     min_price = models.DecimalField(verbose_name='조건(최소금액)', null=True, max_digits=20, decimal_places=2)
     max_dc_price = models.DecimalField(verbose_name='조건(최대할인금액)', null=True, max_digits=20, decimal_places=2)
-    dc_type = models.CharField(max_length=16, verbose_name='타입(할인종류)', choices=CouponCategoryChoices.choices)
+    dc_type = models.CharField(max_length=16, verbose_name='타입(할인종류)', choices=DC_TYPE)
     iss_type = models.PositiveIntegerField(verbose_name='타입(발급종류)', choices=ISS_TYPE)
     value = models.DecimalField(verbose_name='값', null=True, max_digits=20, decimal_places=2)
     description = models.CharField(verbose_name='설명', max_length=30)

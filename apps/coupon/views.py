@@ -27,6 +27,5 @@ class CouponStatisticsViewSet(mixins.ListModelMixin,
                               mixins.RetrieveModelMixin,
                               viewsets.GenericViewSet):
     """ 쿠폰 타입별 사용 내역 통계 Viewset """
-
     queryset = CouponType.objects.all()
     serializer_class = CouponStatisticsSerializer
