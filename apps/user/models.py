@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.core.validators import MinValueValidator
+from django.utils.translation import gettext_lazy as _
 
 class Nationality(models.Model):
     """
@@ -53,15 +53,51 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     GENDER_CHOICES = (('Male', '남성'), ('Female', '여성'))
 
-    id = models.AutoField(primary_key=True)
-    username = models.CharField(default='', max_length=100, null=False, blank=False, unique=True)
-    email = models.EmailField(default='', max_length=100, null=False, blank=False, unique=True)
-    name = models.CharField(default='', max_length=100, null=False, blank=False)
-    city = models.CharField(max_length=100, null=True)
-    age = models.IntegerField(validators=[MinValueValidator(1)], null=True, blank=True)
-    gender = models.CharField(max_length=6, choices=GENDER_CHOICES, null=True, blank=True)
-    nationality = models.ForeignKey(Nationality, null=False, on_delete=models.CASCADE, related_name='user_nationality', default=191, db_column='nationality')
-    zipcode = models.CharField(max_length=20, null=True, blank=True)
+    username = models.CharField(
+        max_length=30,
+        unique=True,
+        null=False,
+        blank=False
+        )
+    email = models.EmailField(
+        max_length=30, 
+        unique=True, 
+        null=False, 
+        blank=False
+        )
+    name = models.CharField(
+        max_length=30,
+        null=False,
+        blank=False
+        )
+    city = models.CharField(
+        max_length=100, 
+        null=False,
+        blank=False
+        )
+    birth_date = models.DateField(
+        verbose_name=_('Birth Date'),
+        null=False,
+        )
+    gender = models.CharField(
+        max_length=6, 
+        choices=GENDER_CHOICES, 
+        null=False, 
+        blank=False
+        )
+    nationality = models.ForeignKey(
+        Nationality, 
+        null=False, 
+        on_delete=models.CASCADE, 
+        related_name='user_nationality', 
+        default=191, 
+        db_column='nationality'
+        )
+    zipcode = models.CharField(
+        max_length=20, 
+        null=True, 
+        blank=True
+        )
 
     # User 모델의 필수 field
     is_active = models.BooleanField(default=True)    
@@ -73,7 +109,7 @@ class User(AbstractBaseUser):
     # 사용자의 username field는 username으로 설정
     USERNAME_FIELD = 'username'
     # 필수로 작성해야하는 field
-    REQUIRED_FIELDS = ['email', 'name']
+    REQUIRED_FIELDS = ['email', 'name', 'birth_date', 'gender']
 
     def __str__(self):
         return self.username
