@@ -16,9 +16,9 @@ class CouponTest(APITestCase):
         self.user = 1
 
         self.coupon_type = CouponType.objects.create(
-            start_date="2023-01-20 00:00:00",
-            end_date="2022-02-19 00:00:00",
-            period=14,
+            start_date="2023-01-31 00:00:00",
+            end_date="2023-02-19 00:00:00",
+            period=20,
             min_price=50000,
             max_dc_price=15000,
             dc_type=0,
@@ -27,9 +27,9 @@ class CouponTest(APITestCase):
         )
 
         self.coupon_type_for_duplicate = CouponType.objects.create(
-            start_date="2023-01-20 00:00:00",
-            end_date="2022-02-19 00:00:00",
-            period=7,
+            start_date="2023-02-01 00:00:00",
+            end_date="2022-02-28 00:00:00",
+            period=27,
             min_price=50000,
             max_dc_price=15000,
             dc_type=0,
@@ -62,7 +62,7 @@ class CouponTest(APITestCase):
 
         self.coupon = Coupon.objects.create(
             type=self.coupon_type_for_duplicate,
-            expired_date=add_period(get_current_date(), self.coupon_type.period),
+            expired_date=add_period(get_current_date(), self.coupon_type_for_duplicate.period),
             is_used=False,
             owner=self.user,
             code=code_generator(1)
@@ -73,8 +73,8 @@ class CouponTest(APITestCase):
 
         data = {
             "start_date": "2023-02-01 00:00:00",
-            "end_date": "2023-02-07 00:00:00",
-            "period": 7,
+            "end_date": "2023-02-20 00:00:00",
+            "period": 19,
             "min_price": 50000,
             "max_dc_price": 15000,
             "dc_type": 2,
@@ -149,17 +149,30 @@ class CouponTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_create_coupon_success(self):
-        """ 쿠폰 발급 성공 테스트  """
+        """ 쿠폰 발급 성공 테스트 """
 
         data = {
             "type": self.coupon_type.id,
             "owner": self.user
         }
-        print(data)
+
         request_url = self.coupon_test_url
 
         response = self.client.post(request_url, data=data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_create_coupon_fail_due_to_duplicate(self):
+        """ 쿠폰 발급 실패 테스트 : 중복 발급 """
+
+        data = {
+            "type": self.coupon_type_for_duplicate.id,
+            "owner": self.user
+        }
+
+        request_url = self.coupon_test_url
+
+        response = self.client.post(request_url, data=data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_create_coupon_fail_due_to_expired(self):
         """ 쿠폰 발급 실패 테스트 : 쿠폰 타입 만료  """
@@ -179,19 +192,6 @@ class CouponTest(APITestCase):
 
         data = {
             "type": self.coupon_type_inactive.id,
-            "owner": self.user
-        }
-
-        request_url = self.coupon_test_url
-
-        response = self.client.post(request_url, data=data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
-    def test_create_coupon_fail_due_to_duplicate(self):
-        """ 쿠폰 발급 실패 테스트 : 중복 발급 """
-
-        data = {
-            "type": self.coupon_type_for_duplicate.id,
             "owner": self.user
         }
 

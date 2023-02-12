@@ -41,6 +41,7 @@ class CouponType(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
+        self.name = self.DC_TYPE[int(self.dc_type)][1]
         return self.name
 
 

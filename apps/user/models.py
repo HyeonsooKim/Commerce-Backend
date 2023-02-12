@@ -13,7 +13,6 @@ class Nationality(models.Model):
 
     def __str__(self):
         return self.country_name
-        # return '{} {} {}'.format(self.country_name, self.country_code, self.country_dcode)
 
 
 class UserManager(BaseUserManager):

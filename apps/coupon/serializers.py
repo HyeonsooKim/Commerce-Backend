@@ -100,6 +100,7 @@ class CouponSerializer(ModelSerializer):
         else:
             expired_date = coupon_type_obj.end_date
 
+        
         return self.Meta.model.objects.create(
                 type=coupon_type,
                 expired_date=expired_date,
