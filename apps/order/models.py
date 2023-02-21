@@ -1,4 +1,3 @@
-from configparser import MAX_INTERPOLATION_DEPTH
 from django.db import models
 from django.conf import settings
 from apps.coupon.models import Coupon
