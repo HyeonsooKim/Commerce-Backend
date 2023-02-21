@@ -17,7 +17,7 @@ class CouponTest(APITestCase):
 
         self.coupon_type = CouponType.objects.create(
             start_date="2023-01-31 00:00:00",
-            end_date="2023-02-19 00:00:00",
+            end_date="2023-06-27 00:00:00",
             period=20,
             min_price=50000,
             max_dc_price=15000,
@@ -28,7 +28,7 @@ class CouponTest(APITestCase):
 
         self.coupon_type_for_duplicate = CouponType.objects.create(
             start_date="2023-02-01 00:00:00",
-            end_date="2022-02-28 00:00:00",
+            end_date="2023-07-27 00:00:00",
             period=27,
             min_price=50000,
             max_dc_price=15000,
@@ -73,7 +73,7 @@ class CouponTest(APITestCase):
 
         data = {
             "start_date": "2023-02-01 00:00:00",
-            "end_date": "2023-02-20 00:00:00",
+            "end_date": "2023-06-20 00:00:00",
             "period": 19,
             "min_price": 50000,
             "max_dc_price": 15000,

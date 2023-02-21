@@ -1,6 +1,7 @@
 from configparser import MAX_INTERPOLATION_DEPTH
 from django.db import models
 from django.conf import settings
+from apps.coupon.models import Coupon
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Delivery(models.Model):
@@ -26,10 +27,8 @@ class Order(models.Model):
         (2, '배송완료'),
         )
 
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, )
-
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE, )
+    coupon = models.ForeignKey(Coupon, on_delete=models.CASCADE,)
     order_date = models.DateTimeField(auto_now_add=True, verbose_name="날짜")
     updated_at = models.DateTimeField(verbose_name='수정 날짜', auto_now=True)
     pay_state = models.PositiveIntegerField(verbose_name='결제 상태', choices=PAY_STATE)
