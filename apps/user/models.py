@@ -20,30 +20,34 @@ class UserManager(BaseUserManager):
     유저 생성 헬퍼클래스 (일반 유저, 관리자)
     """
     # 일반 user 생성
-    def create_user(self, email, username, name, password=None):
+    def create_user(self, email, username, name, password=None, **extra_fields):
         if not email:
             raise ValueError('must have user email')
         if not username:
             raise ValueError('must have user username')
         if not name:
             raise ValueError('must have user name')
+
         user = self.model(
             email = self.normalize_email(email),
             username = username,
-            name = name
+            name = name,
+            **extra_fields
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
     # 관리자 user 생성
-    def create_superuser(self, email, username, name, password=None):
+    def create_superuser(self, email, username, name, password=None, **extra_fields):
         user = self.create_user(
             email,
             password = password,
             username = username,
-            name = name
+            name = name,
+            **extra_fields
         )
+        user.is_staff = True
         user.is_admin = True
         user.save(using=self._db)
         return user
@@ -90,7 +94,7 @@ class User(AbstractBaseUser):
         on_delete=models.CASCADE, 
         related_name='user_nationality', 
         default=191, 
-        db_column='nationality'
+        # db_column='nationality'
         )
     zipcode = models.CharField(
         max_length=20, 
