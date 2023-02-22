@@ -1,20 +1,12 @@
 from django.urls import path, include
-from . import views
+from rest_framework.routers import DefaultRouter
+from .views import OrderViewSet, OrderTestViewSet
 
-# order 목록 보여주기
-order_list = views.OrderViewSet.as_view({
-    'get': 'list',
-    'post': 'create'
-})
+router = DefaultRouter()
+router.register(r'test', OrderTestViewSet, basename='order-test')
+router.register(r'', OrderViewSet, basename='orders')
 
-# order detail 보여주기 + 수정 + 삭제
-order_detail = views.OrderViewSet.as_view({
-    'get': 'retrieve',
-    'put': 'update',
-    'delete': 'destroy'
-})
 
-urlpatterns =[
-    path('', order_list),
-    path('<int:pk>', order_detail),
+urlpatterns = [
+    path('', include(router.urls)),
 ]

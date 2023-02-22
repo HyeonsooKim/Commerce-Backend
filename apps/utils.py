@@ -50,7 +50,9 @@ def add_period(issue_date, period):
     expired_date = datetime.strptime(issue_date, '%Y-%m-%d %H:%M:%S') + timedelta(days=period)
     return expired_date.strftime('%Y-%m-%d %H:%M:%S')
 
-
+def get_dollar(krw):
+    return krw // 1200
+    
 def get_exchange_rate(date=None):
     """
     원 - 달러 환율 반환 함수
